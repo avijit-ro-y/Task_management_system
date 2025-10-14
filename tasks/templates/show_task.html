@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div>
+            <ul>
+                {% for task in tasks %}
+                    <li>
+                        <p>{{task.title}}</p>
+                        <p>{{task.status}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            {{tasks3}}
+        </div>
+        <div>
+            <ul>
+                {% for task in pendingtasks %}
+                    <li>{{task}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            {% for task in selecttasks %}
+                <li>{{task.title}}</li>
+            {% endfor %}
+            
+        </div>
+        <p>{{task_count}}</p>
+        <div>
+            {% for task in task_count_each %}
+                <li>{{task.num_task}}</li>
+            {% endfor %}
+            
+        </div>
+    </body>
+</html>
