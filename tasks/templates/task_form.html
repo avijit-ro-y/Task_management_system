@@ -12,15 +12,17 @@
     <body>
         <div>
             <div class='w-1/2 mx-auto mt-8'>
-                {% if message %}
-                    <p>{{message}}</p>
-                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="px-2 py-1 {% if message.tags == 'success' %}bg-green-600{% endif %}">{{message}}</div>
+                    {% endfor %}
                 {% endif %}
             </div>
             <form method="POST">
                 {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit">Submit</button>
+                {{task_form}}
+                {{task_detail_form}}
+                <button type="submit" >Submit</button>
             </form>
             <script src="" async defer></script>
         </div>
