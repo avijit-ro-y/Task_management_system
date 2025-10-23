@@ -13,7 +13,13 @@ class TaskForm(forms.Form):
         self.fields['assigned_to'].choices=[(emp.id,emp.name) for  emp in employees]
 
 class StyledFormMixin:
+    
     default_classes="border-2 border-gray-200 w-full rounded-lg shadow-sm focus:border-rose-300 focus:ring-rose-500"
+    
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.apply_styled_widget()
+        
     def apply_styled_widget(self):
         for filed_name,field in self.fields.items():
             if isinstance(field.widget,forms.TextInput):
@@ -43,8 +49,8 @@ class StyledFormMixin:
 
        
 class TaskModelForm(StyledFormMixin,forms.ModelForm):
-    class Meta:
-        model=Task
+    class Meta: #meta class form er behaviour change korte help kore
+        model=Task #meta class e minimum 2 ta perameter lagei...ekta model arekta field...model bolte ekhane kon model er upor kaj korte chai 
         fields='__all__'
         widget={
             'due_date':forms.SelectDateWidget,
@@ -71,9 +77,6 @@ class TaskModelForm(StyledFormMixin,forms.ModelForm):
         #         }
         #     )
         # }
-    def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
-        self.apply_styled_widget()
         
 class TaskDetailModelForm(StyledFormMixin,forms.ModelForm):
     class  Meta:

@@ -45,7 +45,7 @@ class TaskDetail(models.Model):
         ('L','Low'),
         
     )
-    task=models.OneToOneField(Task,on_delete=models.CASCADE,related_name="details")
+    task=models.OneToOneField(Task,on_delete=models.DO_NOTHING,related_name="details")
     # assigned_to=models.CharField(max_length=100)
     priority=models.CharField(max_length=1,choices=Priority_options,default=Low)
     notes=models.TextField(blank=True,null=True)
