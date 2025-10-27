@@ -7,11 +7,12 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'css/output.css' %}">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        {% comment %} <link rel="stylesheet" href="{% static 'css/output.css' %}"> {% endcomment %}
     </head>
     <body>
-        <div>
-            <div class='w-1/2 mx-auto mt-8'>
+        <div class='w-1/2 mx-auto mt-8'>
+            <div class=''>
                 {% if messages %}
                     {% for message in messages %}
                         <div class="px-2 py-1 {% if message.tags == 'success' %}bg-green-600{% endif %}">{{message}}</div>
@@ -22,7 +23,7 @@
                 {% csrf_token %}
                 {{task_form}}
                 {{task_detail_form}}
-                <button type="submit" >Submit</button>
+                <button type="submit" class='bg-cyan-500 text-white'>Submit</button>
             </form>
             <script src="" async defer></script>
         </div>
