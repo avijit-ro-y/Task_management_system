@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -6,14 +7,6 @@ class Project(models.Model):
     name=models.CharField(max_length=100)
     start_date=models.DateField()
     description=models.TextField(blank=True,null=True)
-    def __str__(self):
-        return self.name
-    
-
-class Employee(models.Model):
-    name=models.CharField(max_length=200)
-    email=models.EmailField(unique=True)
-    
     def __str__(self):
         return self.name
 
@@ -26,10 +19,9 @@ class Task(models.Model):
     project=models.ForeignKey(Project,on_delete=models.CASCADE,default=1)
     title=models.CharField(max_length=250)
     description =models.TextField() 
-    assigned_to=models.ManyToManyField(Employee)
+    assigned_to=models.ManyToManyField(User,related_name='tasks')
     due_date=models.DateField()
     status=models.CharField(max_length=30,choices=STATUS_CHOICES,default='PENDING')
-    is_completed=models.BooleanField(default=False)
     created_at=models.DateTimeField(auto_now_add=True)
     update=models.DateTimeField(auto_now=True)
     def __str__(self):
@@ -46,7 +38,7 @@ class TaskDetail(models.Model):
         
     )
     task=models.OneToOneField(Task,on_delete=models.DO_NOTHING,related_name="details")
-    # assigned_to=models.CharField(max_length=100)
+    asset=models.ImageField(upload_to='tasks_asset',blank=True,null=True,default="tasks_asset/1377010.jpg")
     priority=models.CharField(max_length=1,choices=Priority_options,default=Low)
     notes=models.TextField(blank=True,null=True)
     def __str__(self):

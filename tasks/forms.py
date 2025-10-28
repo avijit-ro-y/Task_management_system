@@ -13,7 +13,6 @@ class TaskForm(forms.Form):
         self.fields['assigned_to'].choices=[(emp.id,emp.name) for  emp in employees]
 
 class StyledFormMixin:
-    
     default_classes="border-2 border-gray-200 w-full rounded-lg shadow-sm focus:border-rose-300 focus:ring-rose-500"
     
     def __init__(self,*args,**kwargs):
@@ -81,7 +80,7 @@ class TaskModelForm(StyledFormMixin,forms.ModelForm):
 class TaskDetailModelForm(StyledFormMixin,forms.ModelForm):
     class  Meta:
         model=TaskDetail
-        fields=['priority','notes']
+        fields=['priority','notes','asset']
         
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)

@@ -19,7 +19,8 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            <form method="POST">
+            {% comment %} image processing er jonno use kora hoy enctype='multipart/form-data' {% endcomment %}
+            <form method="POST" enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{task_form}}
                 {{task_detail_form}}
