@@ -178,12 +178,11 @@ def delete_task(request,id):
 @permission_required('tasks.view_task',login_url='no-permission') #ekhane tasks model name and  add_task code name
 def view_task(request):
     tasks=Task.objects.all()
-    task_3=Task.objects.get(id=1)
     pending_tasks=Task.objects.filter(status="PENDING")
     select_tasks=Task.objects.select_related("details").all()
     task_count=Task.objects.aggregate(num_task=Count('id'))
     task_count_under_project=Project.objects.annotate(num_task=Count('task'))
-    return render(request,"show_task.html",{"tasks":tasks ,"tasks3":task_3,"pendingtasks":pending_tasks,"selecttasks":select_tasks,"task_count":task_count,"task_count_each":task_count_under_project})
+    return render(request,"show_task.html",{"tasks":tasks ,"pendingtasks":pending_tasks,"selecttasks":select_tasks,"task_count":task_count,"task_count_each":task_count_under_project})
 
 @login_required
 @permission_required('tasks.view_task',login_url='no-permission')
@@ -228,7 +227,7 @@ def dashboard(request):
     elif is_admin(request.user):
         return redirect('admin-dashboard')
     
-    return render('no-permission')
+    return redirect('profile')
 
 
 #variable for list of decorators
